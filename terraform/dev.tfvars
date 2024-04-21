@@ -87,3 +87,7 @@ alb_name = "aws_infra_alb"
 ####### API GATEWAY #########
 api_gateway_name = "aws_api_gateway"
 vpc_link_name = "vpc_alb_api"
+
+##### SSH-KEY ######
+key_name = "kenshi"
+

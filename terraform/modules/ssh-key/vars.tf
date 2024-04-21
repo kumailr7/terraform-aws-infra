@@ -5,5 +5,4 @@ variable "ssh_public_key" {
 
 variable "key_name" {
   type = string
-  default = "kenshi"
 }
