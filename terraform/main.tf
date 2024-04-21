@@ -21,10 +21,6 @@ module "subnets" {
   vpc_id = module.vpc.vpc_id
   public_subnet_cidr_prefixes = var.public_subnet_cidr_prefixes
   private_subnet_cidr_prefixes = var.private_subnet_cidr_prefixes
-  public_ip = var.public_ip
-  private_ip = var.private_ip
-  public_subnets = var.public_subnets
-  ip_range = var.ip_range
   availability_zones = var.availability_zones
   igw_id = module.igw.igw_id
   tags = var.tags

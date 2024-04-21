@@ -19,27 +19,8 @@ variable "igw_id" {
   type = string
 }
 
-variable "ip_range" {
-  type =string
-}
-
 variable "vpc_id" {
   type = string
-}
-
-variable "public_subnets" {
-  description = "A list of public subnets inside the VPC"
-  type = string
-}
-
-variable "private_ip" {
-  description = "should be true to be enabled DNS hostnames in the VPC"
-  type = bool
-}
-
-variable "public_ip" {
-  description = "should be true to be enabled DNS hostnames in the VPC"
-  type = bool
 }
 
 variable "tags" {

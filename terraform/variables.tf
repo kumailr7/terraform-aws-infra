@@ -51,33 +51,6 @@ variable "private_subnet_cidr_prefixes" {
   description = "List of CIDR blocks for private subnets in each AZ"
 }
 
-variable "igw_id" {
-  type = string
-}
-
-variable "ip_range" {
-  type =string
-}
-
-variable "vpc_id" {
-  type = string
-}
-
-variable "public_subnets" {
-  description = "A list of public subnets inside the VPC"
-  type = string
-}
-
-variable "private_ip" {
-  description = "should be true to be enabled DNS hostnames in the VPC"
-  type = bool
-}
-
-variable "public_ip" {
-  description = "should be true to be enabled DNS hostnames in the VPC"
-  type = bool
-}
-
 ######## SECURITY GROUP ########
 variable "instance_ingress_ports" {
   type = list(object({

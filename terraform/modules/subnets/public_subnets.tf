@@ -1,8 +1,7 @@
 // Create public subnets in all AZs
 resource "aws_subnet" "public_subnet" {
   vpc_id            = var.vpc_id
-  count             = length(var.availability_zones)
-  map_public_ip_on_launch = var.public_subnets    ## It mskes this a public Subnet 
+  count             = length(var.availability_zones) 
   cidr_block        = var.public_subnet_cidr_prefixes[count.index]  # Adjust CIDR for each AZ
   availability_zone = var.availability_zones[count.index]
   tags = merge(
