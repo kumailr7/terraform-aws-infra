@@ -12,11 +12,6 @@ variable "public_subnet_ids" {
   type = string
 }
 
-variable "key_name" {
-  type = string
-  description = "the ssh key used to access the instances"
-}
-
 variable "tags" {
   description = "A map of tags to apply to the resources"
   type        = map(string)
