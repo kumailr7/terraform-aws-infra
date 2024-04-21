@@ -30,7 +30,7 @@ resource "aws_route_table" "private_route_table" {
 
 # Associate public route table with public subnet
 resource "aws_route_table_association" "subnet_private_route_table_association" {
-  subnet_id      = aws_subnet.private_subnet.id
+  subnet_id      = aws_subnet.private_subnet[count.index].id
   route_table_id = aws_route_table.private_route_table.id
 }
 
@@ -43,7 +43,7 @@ resource "aws_eip" "two" {
 # Create a NAT Gateway
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.two.allocation_id
-  subnet_id     = aws_subnet.private_subnet.id
+  subnet_id     = aws_subnet.private_subnet[count.index].id
   depends_on = [ var.igw_id ]
   tags = merge(
     var.tags, {Name = "${var.app}-${var.environment}-nat-gateway"}
