@@ -1,0 +1,92 @@
+name: Terraform Plan Workflow
+'on':
+  push:
+    branches:
+      - dev
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+          terraform_version: 1.5.4
+
+      - name: Set up AWS Cli
+        env:
+          AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}'
+          AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRET_ACCESS_KEY }}'
+          AWS_DEFAULT_REGION: '${{ secrets.AWS_REGION }}'
+          AWS_ACCOUNT_ID: '${{ secrets.ACCOUNT_ID }}'
+        run: |
+          sudo terraform -version
+          sudo apt-get update 
+          sudo apt install awscli zip -y
+          echo "aws version"
+          sudo aws --version
+          echo "configuring ACCESS_KEY"
+          sudo aws configure set AWS_ACCESS_KEY_ID $AWS_ACCESS_KEY_ID; 
+          echo "configuring ACCESS_SECRET"
+          sudo aws configure set AWS_SECRET_ACCESS_KEY $AWS_SECRET_ACCESS_KEY;
+          echo "Configure region"
+          sudo aws configure set region ap-south-1;
+
+      - name: Set branch name as an environment variable
+        run: |
+          BRANCH_NAME=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "UPDATED_SSH_KEY=${{ secrets.SSH_KEY }}" >> $GITHUB_ENV
+          echo "SSH key: $SSH_KEY"
+          echo "::set-env name=SSH_KEY::$SSH_KEY"
+        
+      - name: Terraform Code Scanning
+        run: |
+          echo $BRANCH_NAME
+          sudo chmod 755 -R terraform
+          cd terraform/
+          terraform fmt -recursive
+          sudo terraform init -backend-config="access_key=${{secrets.AWS_ACCESS_KEY_ID }}" -backend-config="secret_key=${{secrets.AWS_SECRET_ACCESS_KEY }}" -backend-config="key=$BRANCH_NAME/tf.tfstate"
+          echo "INIT completed"
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars
+          #echo "##################### Validating Terraform Codebase ########################"
+          #terraform validate
+          
+      
+      # - name: Terraform Plan and Apply
+      #   id: plan
+      #   run: |
+      #     cd terraform
+      #     echo $AWS_ACCOUNT_ID
+      #     sudo terraform plan -var-file=$BRANCH_NAME.tfvars 
+      #     sudo terraform apply -target=aws_identitystore_user.sso_user1 -target=aws_identitystore_group.aws_group -target=aws_identitystore_group_membership.aws_membership -target=aws_ssoadmin_permission_set.mypermissionset -target=aws_ssoadmin_account_assignment.assignment  -var-file=$BRANCH_NAME.tfvars -auto-approve
+
+      - name: Terraform Plan and Apply
+        id: plan
+        run: |
+          cd terraform
+          echo $AWS_ACCOUNT_ID
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="ssh_public_key=${{ env.SSH_KEY }}"
+        #   sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -var="SSH_KEY=$SSH_KEY"
+
+      # - name:  Terraform to destroy
+      #   id: destroy
+      #   env:
+      #     AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}'
+      #     AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRET_ACCESS_KEY }}'
+      #     AWS_DEFAULT_REGION: '${{ secrets.AWS_REGION }}'
+      #     AWS_ACCOUNT_ID: '${{ secrets.ACCOUNT_ID }}'
+      #   run: |
+      #     cd terraform
+      #     terraform destroy -var-file=$BRANCH_NAME.tfvars -auto-approve

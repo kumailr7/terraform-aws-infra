@@ -97,3 +97,21 @@ variable "alb_ingress_ports" {
     protocol    = string
   }))
 }
+
+###### ALB ######
+variable "alb_name" {
+  type = string
+}
+
+#### API GATEWAY #####
+variable "api_gateway_name" {
+  type = string
+}
+
+variable "vpc_link_name" {
+  type = string
+}
+
+variable "key_name" {
+  type = string
+}

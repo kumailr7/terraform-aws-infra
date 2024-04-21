@@ -1,5 +1,5 @@
 variable "ami_id" {
-  type =string
+  type = string
   default = "ami-0dba2cb6798deb6d8"
   description = "the AMI ID for UBUNTU 20.04"
 }

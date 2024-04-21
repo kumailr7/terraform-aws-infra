@@ -81,3 +81,9 @@ alb_ingress_ports = [
   ]
 ]
 
+####### APPLICATION LOAD BALANCER ######
+alb_name = aws-infra-alb
+
+####### API GATEWAY #########
+api_gateway_name = aws-api-gateway
+vpc_link_name = vpc-alb-api
