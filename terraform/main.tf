@@ -47,8 +47,9 @@ module "sg" {
 ######################
 
 module "igw" {
-  source = "./module/igw"
-  vpc    = module.vpc.vpc_id
+  source = "./modules/igw"
+  vpc_id = module.vpc.vpc_id
+  tags = var.tags
 }
 
 ##################
