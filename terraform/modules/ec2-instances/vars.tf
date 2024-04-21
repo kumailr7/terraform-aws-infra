@@ -25,6 +25,10 @@ variable "app" {
 
 variable "environment" {
   description = "Name of the environment"
-  type        = string
+  type    = string
   default = "dev"
+}
+
+variable "web_sg_id" {
+  type = list(string)
 }

@@ -16,12 +16,12 @@ resource "aws_route_table" "private_route_table" {
     ## assocaited Subnet can reach everywhere
     cidr_block = "0.0.0.0/0"
     ## CRT uses this IGW to reach internet
-    nat_gateway_id = aws_nat_gateway.nat.id
+    nat_gateway_id = var.igw_id
   }
 
   route {
     ipv6_cidr_block = "::/0"
-    gateway_id      = aws_internet_gateway.gw.id
+    gateway_id      = var.igw_id
   }
   tags = merge(
     var.tags, {Name = "${var.app}-${var.environment}-private-rt"}
@@ -37,7 +37,6 @@ resource "aws_route_table_association" "subnet_private_route_table_association" 
 
 ## Creating a Elastic IP
 resource "aws_eip" "two" {
-  vpc                       = true
   depends_on                = [var.igw_id]
 }
 

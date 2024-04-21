@@ -37,6 +37,5 @@ resource "aws_route_table_association" "subnet_route_table_association" {
 
 ## Creating a Elastic IP
 resource "aws_eip" "one" {
-  vpc                       = true
   depends_on                = [var.igw_id]
 }

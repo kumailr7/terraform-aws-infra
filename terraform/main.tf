@@ -70,6 +70,7 @@ module "apigateway" {
   api_gateway_name = var.api_gateway_name
   vpc_link_name = var.vpc_link_name
   tags = var.tags
+  alb_dnsname = module.alb.alb_dnsname
 }
 
 #####################
@@ -92,4 +93,5 @@ module "ec2_instances" {
   private_subnet_ids = module.subnets.private_subnet_ids
   public_subnet_ids = module.subnets.public_subnet_ids
   tags = var.tags
+  web_sg_id = module.sg.web_sg_id
 }
