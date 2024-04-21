@@ -10,7 +10,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_route_table" "private_route_table" {
-  vpc_id = var.vpc.id
+  vpc_id = var.vpc_id
 
   route {
     ## assocaited Subnet can reach everywhere

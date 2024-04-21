@@ -21,7 +21,7 @@ resource "aws_route_table" "public_route_table" {
 
   route {
     ipv6_cidr_block = "::/0"
-    gateway_id      = aws_internet_gateway.gw.id
+    gateway_id      = var.igw_id
   }
   tags = merge(
     var.tags, {Name = "${var.app}-${var.environment}-public-rt"}
