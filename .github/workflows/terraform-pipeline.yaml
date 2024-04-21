@@ -75,7 +75,7 @@ jobs:
         run: |
           cd terraform
           echo $AWS_ACCOUNT_ID
-          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="key_name=${{ env.UPDATED_SSH_KEY }}" -lock=false
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="key_name=${{ secrets.SSH_KEY }}" -lock=false
         #   sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -var="SSH_KEY=$SSH_KEY"
 
       # - name:  Terraform to destroy
