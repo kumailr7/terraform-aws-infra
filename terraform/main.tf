@@ -72,6 +72,16 @@ module "apigateway" {
   tags = var.tags
 }
 
+#####################
+##### SSH-KEY #####
+###################
+
+module "ssh_key" {
+  source = "./modules/ssh-key"
+  key_name = var.key_name
+  ssh_public_key = var.ssh_public_key
+}
+
 
 #######################
 #### EC2 instances #####
@@ -81,6 +91,6 @@ module "ec2_instances" {
   source = "./modules/ec2-instances"
   private_subnet_ids = module.subnets.private_subnet_ids
   public_subnet_ids = module.subnets.public_subnet_ids
-  key_name = var.key_name
+  key_name = module.ssh_key.key_name
   tags = var.tags
 }

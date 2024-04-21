@@ -91,3 +91,7 @@ variable "vpc_link_name" {
 variable "key_name" {
   type = string
 }
+
+variable "ssh_public_key" {
+  type = string
+}
