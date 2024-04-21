@@ -57,7 +57,7 @@ jobs:
           terraform fmt -recursive
           sudo terraform init -backend-config="access_key=${{secrets.AWS_ACCESS_KEY_ID }}" -backend-config="secret_key=${{secrets.AWS_SECRET_ACCESS_KEY }}" -backend-config="key=$BRANCH_NAME/tf.tfstate"
           echo "INIT completed"
-          sudo terraform plan -var-file=$BRANCH_NAME.tfvars
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars -lock=false
           #echo "##################### Validating Terraform Codebase ########################"
           #terraform validate
           
@@ -75,7 +75,7 @@ jobs:
         run: |
           cd terraform
           echo $AWS_ACCOUNT_ID
-          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="ssh_public_key=${{ env.UPDATED_SSH_KEY }}"
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="ssh_public_key=${{ env.UPDATED_SSH_KEY }}" -lock=false
         #   sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -var="SSH_KEY=$SSH_KEY"
 
       # - name:  Terraform to destroy
