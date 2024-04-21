@@ -87,11 +87,3 @@ variable "api_gateway_name" {
 variable "vpc_link_name" {
   type = string
 }
-
-variable "key_name" {
-  type = string
-}
-
-variable "ssh_public_key" {
-  type = string
-}
