@@ -48,8 +48,6 @@ jobs:
           BRANCH_NAME=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
           echo "UPDATED_SSH_KEY=${{ secrets.SSH_KEY }}" >> $GITHUB_ENV
-          echo "SSH key: $SSH_KEY"
-          echo "::set-env name=SSH_KEY::$SSH_KEY"
         
       - name: Terraform Code Scanning
         run: |
@@ -77,7 +75,7 @@ jobs:
         run: |
           cd terraform
           echo $AWS_ACCOUNT_ID
-          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="ssh_public_key=${{ env.SSH_KEY }}"
+          sudo terraform plan -var-file=$BRANCH_NAME.tfvars  -var="ssh_public_key=${{ env.UPDATED_SSH_KEY }}"
         #   sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -var="SSH_KEY=$SSH_KEY"
 
       # - name:  Terraform to destroy
