@@ -1,7 +1,7 @@
 // Create private subnets in all AZs
 resource "aws_subnet" "private_subnet" {
   vpc_id            = var.vpc_id
-  count             = length(var.availability_zones)
+  count             = 3
   cidr_block        = var.private_subnet_cidr_prefixes[count.index] # Adjust CIDR for each AZ
   availability_zone = var.availability_zones[count.index]
   tags = merge(
@@ -30,7 +30,7 @@ resource "aws_route_table" "private_route_table" {
 
 # Associate public route table with public subnet
 resource "aws_route_table_association" "subnet_private_route_table_association" {
-  count             = length(aws_subnet.private_subnet)
+  count          = 3
   subnet_id      = aws_subnet.private_subnet[count.index].id
   route_table_id = aws_route_table.private_route_table.id
 }
