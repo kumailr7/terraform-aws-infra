@@ -66,7 +66,7 @@ module "alb" {
 
 module "apigateway" {
   source = "./modules/apigateway"
-  alb_arn = module.alb.alb_arn
+  alb_arn = [module.alb.alb_arn]
   api_gateway_name = var.api_gateway_name
   vpc_link_name = var.vpc_link_name
   tags = var.tags
