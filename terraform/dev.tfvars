@@ -68,7 +68,7 @@ alb_ingress_ports = [
       from_port   = 0
       to_port     = 65535
       protocol    = "tcp"
-      cidr_blocks = ["10.10.4.0/16"]
+      cidr_blocks = ["10.10.0.0/16"]
     }
 ]
 
