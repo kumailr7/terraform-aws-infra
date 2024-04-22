@@ -87,3 +87,4 @@ variable "api_gateway_name" {
 variable "vpc_link_name" {
   type = string
 }
+

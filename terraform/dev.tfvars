@@ -26,63 +26,51 @@ private_subnet_cidr_prefixes = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
 ##### EC2 instance #######
 
 instance_ingress_ports = [
-  [
     {
       description = "HTTPS"
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-    }
-  ],
-  [
+    },
     {
       description = "HTTP"
       from_port   = 80
       to_port     = 80
       protocol    = "tcp"
-    }
-  ],
-  [
+    },
     {
       description = "SSH"
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
     }
-  ]
 ]
 
 ###### ALB  ##########
 
 alb_ingress_ports = [
-  [
     {
       description = "HTTPS"
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-    }
-  ],
-  [
+    },
     {
       description = "HTTP"
       from_port   = 80
       to_port     = 80
       protocol    = "tcp"
-    }
-  ],
-  [
+    },
     {
       description = "SSH"
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
     }
-  ]
 ]
 
 ####### APPLICATION LOAD BALANCER ######
-alb_name = "aws_infra_alb"
+alb_name = "aws-infra-alb"
 
 ####### API GATEWAY #########
 api_gateway_name = "aws_api_gateway"
