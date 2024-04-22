@@ -38,15 +38,15 @@ module "sg" {
   tags = var.tags
 }
 
-# ######################
-# ###### INTERNET GATEWAY #######
-# ######################
+######################
+###### INTERNET GATEWAY #######
+######################
 
-# module "igw" {
-#   source = "./modules/igw"
-#   vpc_id = module.vpc.vpc_id
-#   tags = var.tags
-# }
+module "igw" {
+  source = "./modules/igw"
+  vpc_id = module.vpc.vpc_id
+  tags = var.tags
+}
 
 # ##################
 # ##### ALB #######
