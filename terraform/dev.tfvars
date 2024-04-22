@@ -72,12 +72,12 @@ alb_ingress_ports = [
     }
 ]
 
-# ####### APPLICATION LOAD BALANCER ######
-# alb_name = "aws-infra-alb"
+####### APPLICATION LOAD BALANCER ######
+alb_name = "aws-infra-alb"
 
-# ####### API GATEWAY #########
-# api_gateway_name = "aws_api_gateway"
-# vpc_link_name = "vpc_alb_api"
+####### API GATEWAY #########
+api_gateway_name = "aws_api_gateway"
+vpc_link_name = "vpc_alb_api"
 
 # ##### SSH-KEY ######
 # key_name = "kenshi"
