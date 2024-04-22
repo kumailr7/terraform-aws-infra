@@ -48,30 +48,30 @@ module "igw" {
   tags = var.tags
 }
 
-# ##################
-# ##### ALB #######
-# ################
+##################
+##### ALB #######
+################
 
-# module "alb" {
-#   source            = "./modules/alb"
-#   alb_name          = var.alb_name
-#   vpc_id            = module.vpc.vpc_id
-#   public_subnet_ids = module.subnets.public_subnet_ids
-#   tags              = var.tags
-# }
+module "alb" {
+  source            = "./modules/alb"
+  alb_name          = var.alb_name
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.subnets.public_subnet_ids
+  tags              = var.tags
+}
 
-# ######################
-# ###### API GATEWAY  #######
-# ######################
+######################
+###### API GATEWAY  #######
+######################
 
-# module "apigateway" {
-#   source = "./modules/apigateway"
-#   alb_arn = module.alb.alb_arn
-#   api_gateway_name = var.api_gateway_name
-#   vpc_link_name = var.vpc_link_name
-#   tags = var.tags
-#   alb_dnsname = module.alb.alb_dnsname
-# }
+module "apigateway" {
+  source = "./modules/apigateway"
+  alb_arn = module.alb.alb_arn
+  api_gateway_name = var.api_gateway_name
+  vpc_link_name = var.vpc_link_name
+  tags = var.tags
+  alb_dnsname = module.alb.alb_dnsname
+}
 
 # #####################
 # ##### SSH-KEY #####
