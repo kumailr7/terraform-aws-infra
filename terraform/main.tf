@@ -73,15 +73,15 @@ module "apigateway" {
   alb_dnsname = module.alb.alb_dnsname
 }
 
-# #####################
-# ##### SSH-KEY #####
-# ###################
+# ####################
+# #### SSH-KEY #####
+# ##################
 
-# # module "ssh_key" {
-# #   source = "./modules/ssh-key"
-# #   key_name = var.key_name
-# #   ssh_public_key = var.ssh_public_key
-# # }
+# module "ssh_key" {
+#   source = "./modules/ssh-key"
+#   key_name = var.key_name
+#   ssh_public_key = var.ssh_public_key
+# }
 
 
 # #######################

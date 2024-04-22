@@ -76,7 +76,13 @@ jobs:
           cd terraform
           echo $AWS_ACCOUNT_ID
           sudo terraform plan -var-file=$BRANCH_NAME.tfvars -lock=false
-        #   sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -var="SSH_KEY=$SSH_KEY"
+
+      - name: Terraform Apply
+        id: apply
+        run: |
+          cd terraform
+          echo $AWS_ACCOUNT_ID
+          sudo terraform apply -var-file=$BRANCH_NAME.tfvars -auto-approve -lock=false
 
       # - name:  Terraform to destroy
       #   id: destroy
