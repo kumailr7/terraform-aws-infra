@@ -3,7 +3,7 @@ resource "aws_subnet" "public_subnet" {
   vpc_id            = var.vpc_id
   count             = 3
   cidr_block        = var.public_subnet_cidr_prefixes[count.index]  # Adjust CIDR for each AZ
-  availability_zone = element(data.aws_availability_zone.azs.names, count.index)
+  availability_zone = var.availability_zones[count.index]
   tags = merge(
     var.tags, {Name = "${var.app}-${var.environment}-public-subnet"}
   )
