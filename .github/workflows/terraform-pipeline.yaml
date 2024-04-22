@@ -88,3 +88,4 @@ jobs:
       #   run: |
       #     cd terraform
       #     terraform destroy -var-file=$BRANCH_NAME.tfvars -auto-approve
+      
