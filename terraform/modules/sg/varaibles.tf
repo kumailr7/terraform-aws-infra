@@ -12,12 +12,8 @@ variable "instance_ingress_ports" {
 
 
 variable "alb_ingress_ports" {
-  type = list(object({
-    description = string
-    from_port   = number
-    to_port     = number
-    protocol    = string
-  }))
+  type = list(any)
+  default = []
 }
 
 variable "tags" {

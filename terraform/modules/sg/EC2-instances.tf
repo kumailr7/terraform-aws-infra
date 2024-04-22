@@ -6,7 +6,7 @@ resource "aws_security_group" "allow_web" {
   vpc_id      = var.vpc_id
 
   dynamic "ingress" {
-    for_each = var.instance_ingress_ports[count.index]
+    for_each = var.instance_ingress_ports
     content {
       description = ingress.value.description
       from_port   = ingress.value.from_port
