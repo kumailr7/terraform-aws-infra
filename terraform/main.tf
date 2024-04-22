@@ -90,8 +90,8 @@ module "apigateway" {
 
 module "ec2_instances" {
   source = "./modules/ec2-instances"
-  private_subnet_ids = module.subnets.private_subnet_ids
-  public_subnet_ids = module.subnets.public_subnet_ids
+  private_subnet_ids = module.subnets.private_subnet_ids.id
+  public_subnet_ids = module.subnets.public_subnet_ids.id
   tags = var.tags
   web_sg_id = module.sg.web_sg_id
 }

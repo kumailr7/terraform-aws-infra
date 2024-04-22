@@ -5,11 +5,11 @@ variable "ami_id" {
 }
 
 variable "private_subnet_ids" {
-  type = list(string)
+  type = string
 }
 
 variable "public_subnet_ids" {
-  type = list(string)
+  type = string
 }
 
 variable "tags" {
